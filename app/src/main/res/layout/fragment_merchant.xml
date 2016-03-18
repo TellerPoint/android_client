@@ -1,30 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="com.tellerpoint.app.fragment.MerchantsFragment">
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--xmlns:tools="http://schemas.android.com/tools"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical"-->
+                <!--tools:context="com.tellerpoint.app.fragment.MerchantsFragment">-->
 
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="15dp"
-        android:text="Pay for Products and Services"
-        android:textStyle="bold"/>
 
-    <!--<TextView-->
-        <!--android:layout_below="@id/label"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textSize="12dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:text="Pay for Your Products and Services" />-->
 
-</RelativeLayout>
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/recycler_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:scrollbars="vertical" />-->
+
+<!--</RelativeLayout>-->
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        tools:context="com.tellerpoint.app.fragment.MerchantsFragment">
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="15dp"
+            android:text="Pay for Products and Services"
+            android:textStyle="bold"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_below="@+id/label"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_create_merchant"
+            android:layout_below="@id/recycler_view"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp"
+            android:text="Create Merchant Account"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/material_grey_100"
+            android:textStyle="bold"
+            android:textSize="10dp"/>
+
+    </RelativeLayout>
+</LinearLayout>
