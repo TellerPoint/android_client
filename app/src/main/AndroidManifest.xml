@@ -20,6 +20,14 @@
             android:name=".activity.MainActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".activity.MerchantProductsListing"
+            android:label="MerchantProductsListing" >
+        </activity>
+        <activity
+            android:name=".activity.MerchantGenericPayActivity"
+            android:label="MerchantGenericPayActivity" >
+        </activity>
     </application>
 
 </manifest>
