@@ -7,6 +7,7 @@ package com.tellerpoint.app.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tellerpoint.app.R;
@@ -14,7 +15,7 @@ import com.tellerpoint.app.R;
 
 public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-//    public TextView merchantName;
+    public TextView merchantName;
     public ImageView merchantLogo;
 
     public RecyclerViewHolders(View itemView) {
