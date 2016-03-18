@@ -7,19 +7,24 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
-    <string name="nav_item_merchants">Merchants</string>
+    <string name="nav_item_merchants">Merchant Listings</string>
     <string name="nav_item_history">Transactions History</string>
-    <string name="nav_item_account">Account</string>
+    <string name="nav_item_account">Account Profile</string>
+    <string name="nav_item_merchant_create">Receive Money</string>
+
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_merchants</item>
         <item>@string/nav_item_history</item>
         <item>@string/nav_item_account</item>
+        <item>@string/nav_item_merchant_create</item>
+
     </string-array>
 
-    <string name="title_accounts">Account</string>
+    <string name="title_account">Account Profile</string>
     <string name="title_history">Transactions  History</string>
-    <string name="title_merchants">Merchants</string>
+    <string name="title_merchants">Merchant Listings</string>
+    <string name="title_merchant_create">Receive Money</string>
 
 </resources>

@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.tellerpoint.app.R;
 import com.tellerpoint.app.fragment.AccountFragment;
+import com.tellerpoint.app.fragment.CreateMerchantFragment;
 import com.tellerpoint.app.fragment.HistoryFragment;
 import com.tellerpoint.app.fragment.MerchantsFragment;
 
@@ -88,7 +89,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 break;
             case 2:
                 fragment = new AccountFragment();
-                title = getString(R.string.title_accounts);
+                title = getString(R.string.title_account);
+                break;
+            case 3:
+                fragment = new CreateMerchantFragment();
+                title = getString(R.string.title_merchant_create);
                 break;
             default:
                 break;
