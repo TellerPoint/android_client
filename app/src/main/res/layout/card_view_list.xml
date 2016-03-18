@@ -17,7 +17,7 @@ android:layout_marginBottom="16dp">
     <ImageView
         android:id="@+id/merchant_logo"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:contentDescription="Merchant Logo"
         android:src="@drawable/silverbird"
         android:layout_centerInParent="true"
