@@ -2,49 +2,43 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:background="#ffffff"
-                tools:context=".SplashActivity">
-
+                tools:context=".MerchantProductsListing">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/suggestion_layout"
+        android:padding="10dp"
         android:orientation="vertical"
-        android:gravity="center"
-        >
-        <!--<ImageView-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:cropToPadding="true"-->
-            <!--android:src="@drawable/logo"></ImageView>-->
+        android:layout_below="@+id/toolbar">
 
         <TextView
-            android:text="Hey! Product List!"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="300dp"
-            style="@style/Base.TextAppearance.AppCompat.Medium"/>
+            android:id="@+id/productslistheader"
+            android:textStyle="bold"
+            android:text=""
+            />
 
-        <!--<android.support.v7.widget.AppCompatButton-->
-            <!--android:id="@+id/btn_start"-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="100dp"-->
-            <!--android:layout_marginBottom="24dp"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="Get Started"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--android:textColor="@color/material_grey_100"-->
-            <!--android:textStyle="bold"-->
-            <!--android:textSize="20dp"/>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggestion_header"
+            android:text="Browse through our available products"/>
 
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/product_listview"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true" >
+
+    </ListView>
 
 </RelativeLayout>
 

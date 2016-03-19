@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginBottom="1dp">
+
+
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_weight="0.2"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/productImage"
+                android:src="@drawable/pinocchio"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.5"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-regular"
+                    android:id="@+id/product_name"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-regular"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/product_desc"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-regular"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/product_amount"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.3"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_product_pay"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="Pay"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/material_grey_100"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="10dp"/>
+
+        </RelativeLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
