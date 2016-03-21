@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#ffffff"
-                tools:context=".MerchantGenericPayActivity">
+                tools:context=".PaymentSuccessfulActivity">
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
@@ -22,7 +22,7 @@
             <!--android:src="@drawable/logo"></ImageView>-->
 
         <TextView
-            android:text="Hey! Generic Pay!"
+            android:text="Your Payment is successful!"
             android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:gravity="center"
@@ -37,7 +37,7 @@
             android:layout_marginTop="100dp"
             android:layout_marginBottom="24dp"
             android:padding="10dp"
-            android:text="Pay"
+            android:text="Back to Home"
             android:background="@color/colorPrimary"
             android:textColor="@color/material_grey_100"
             android:textStyle="bold"

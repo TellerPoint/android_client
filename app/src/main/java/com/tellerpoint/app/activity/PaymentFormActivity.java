@@ -4,6 +4,8 @@ package com.tellerpoint.app.activity;
  * Created by eit on 3/17/16.
  */
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,18 +15,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -36,13 +35,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class PaymentFormActivity extends AppCompatActivity {
+public class PaymentFormActivity extends Activity {
+
     private TextView toolbarTitle;
 
     private Context context;
     private boolean isConnected;
     private String merchant_id;
-    private String transactionId;
+    private int transactionId;
     private String smsCode;
 
     private String merchant_name;
@@ -91,9 +91,9 @@ public class PaymentFormActivity extends AppCompatActivity {
 //        pBar = (ProgressBar) findViewById(R.id.loadingPanelComment);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
 
@@ -119,7 +119,8 @@ public class PaymentFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 customerPhoneNumber = phoneNumber.getText().toString();
-                submitPayment(merchant_id, product_id, customerPhoneNumber, qty, product_amount);
+                transactionId = 25;
+                submitPayment(merchant_id, product_id, customerPhoneNumber, qty, product_amount, transactionId);
             }
 
         });
@@ -127,96 +128,101 @@ public class PaymentFormActivity extends AppCompatActivity {
 
     }
 
-    public void submitPayment(String merchant_id, String product_id, String customerPhoneNumber, String qty, String product_amount){
+    public void submitPayment(String merchant_id, String product_id, String customerPhoneNumber, String qty, String product_amount, final int transactionId){
         final ProgressDialog progressDialog = new ProgressDialog(PaymentFormActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String URL = "http://tellerpoint.herokuapp.com/index.php/api/purchase";
+//        String URL = "http://tellerpoint.herokuapp.com/index.php/api/purchase";
+        String URL = "http://tellerpoint.herokuapp.com/index.php/api/purchase/" + merchant_id +"/" + product_id +"/" + customerPhoneNumber + "/" + qty + "/" + product_amount;
 
 
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("merchant_id", merchant_id);
-        jsonObject.addProperty("product_id", product_id);
-        jsonObject.addProperty("customer_phone", customerPhoneNumber);
-        jsonObject.addProperty("qty", qty);
-        jsonObject.addProperty("amount", product_amount);
-
-        Ion.with(PaymentFormActivity.this)
-                .load("POST", URL)
-                .setJsonObjectBody(jsonObject)
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.addProperty("merchant_id", merchant_id);
+//        jsonObject.addProperty("product_id", product_id);
+//        jsonObject.addProperty("customer_phone", customerPhoneNumber);
+//        jsonObject.addProperty("qty", qty);
+//        jsonObject.addProperty("amount", product_amount);
+        if (isConnected) {
+        Ion.with(context)
+                .load("GET", URL)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        Log.e("api exception", e.toString());
-                        Log.e("api result", result.toString());
-
-                        if (e == null && result != null) {
+//                        if (e == null && result != null) {
                             progressDialog.dismiss();
-                            Log.e("purchase sent", result.toString());
-                            payButton.setEnabled(false);
+//                            Log.e("purchase sent", result.toString());
+//                            payButton.setEnabled(false);
 
-                            JsonObject jsonObject = result.getAsJsonObject();
-                            transactionId = jsonObject.get("id").getAsString();
-                            Log.e("transaction id", transactionId);
+//                            JsonObject jsonObject = result.getAsJsonObject();
+//                            transactionId = 23 + 1;
+//                            Log.e("transaction id", transactionId);
 
-                            AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                            AlertDialog.Builder alert = new AlertDialog.Builder(PaymentFormActivity.this);
                             alert.setTitle("ENTER SMS CODE");
-                            final EditText input = new EditText(context);
+                            final EditText input = new EditText(PaymentFormActivity.this);
                             input.setInputType(InputType.TYPE_CLASS_NUMBER);
                             input.setRawInputType(Configuration.KEYBOARD_12KEY);
                             alert.setView(input);
                             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     //Put actions for OK button here
-                                    verifySmsCode(input.getText().toString());
+                                    verifySmsCode(input.getText().toString(), transactionId + 1);
                                 }
                             });
                             alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     //Put actions for CANCEL button here, or leave in blank
+                                    dialog.dismiss();
                                 }
                             });
                             alert.show();
-
-                        } else {
-                            Log.e("api result", e.toString());
-                            payButton.setEnabled(true);
-
-                        }
                     }
 
                 });
+        } else {
+            Toast.makeText(this.context, "No internet Connection, Try again", Toast.LENGTH_LONG).show();
+        }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    private void verifySmsCode(String smsCode, int txnId){
+        String URL = "http://tellerpoint.herokuapp.com/index.php/api/purchase/validate";
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final ProgressDialog progressDialog = new ProgressDialog(PaymentFormActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Processing...");
+        progressDialog.show();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if (id == android.R.id.home){
-            finish();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("transaction_id", txnId);
+        jsonObject.addProperty("smsCode", smsCode);
+        if (isConnected) {
+            Ion.with(context)
+                    .load("POST", URL)
+                    .setJsonObjectBody(jsonObject)
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            progressDialog.dismiss();
+//                            Log.e("result", result.toString());
+                            Intent i = new Intent(PaymentFormActivity.this, PaymentSuccessfulActivity.class);
+                            startActivity(i);
+                            PaymentFormActivity.this.finish();
+
+                        }
+                    });
+        } else {
+            Toast.makeText(this.context, "No internet Connection, Try again", Toast.LENGTH_LONG).show();
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
-    private void verifySmsCode(String smsCode){
-
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 
